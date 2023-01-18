@@ -44,8 +44,9 @@ steps:
   displayName: 'Build the project - Release'
   inputs:
     command: 'build'
-    arguments: '--no-restore --configuration Release'
+    arguments: '--no-restore --configuration Release '
     projects: '**/*.csproj'
+    packDirectory: '$(Build.ArtifactStagingDirectory)'
 
 - task:  DotNetCoreCLI@2
   displayName: 'Publish the project - relaease'
