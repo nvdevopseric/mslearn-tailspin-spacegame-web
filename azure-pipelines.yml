@@ -40,21 +40,13 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Build the project - Release'
-  inputs:
-    command: 'build'
-    arguments: '--no-restore --configuration Release '
-    projects: '**/*.csproj'
+- template: templates/build.yaml
+  parameters:
+    buildConfiguration: 'Debug'
+- template: templates/build.yaml
+  parameters:
+    buildConfiguration: 'Release'
 
-- task:  DotNetCoreCLI@2
-  displayName: 'Publish the project - relaease'
-  inputs:
-    command: 'publish'
-    projects: '**/*.csproj'
-    publishWebProjects: false
-    arguments: '--configuration Release --output $(Build.ArtifactsStagingDirectory)/Release'
-    zipAfterPublish: true
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
