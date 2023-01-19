@@ -38,16 +38,15 @@ steps:
   # NuGet authenticate v1
 # Configure NuGet tools to authenticate with Azure Artifacts and other NuGet repositories. Requires NuGet >= 4.8.5385, dotnet >= 6, or MSBuild >= 15.8.166.59604.
 - task: NuGetAuthenticate@1
-inputs:
-  #nuGetServiceConnections: # string. Service connection credentials for feeds outside this organization. 
-  forceReinstallCredentialProvider: true 
-# boolean. Reinstall the credential provider even if already installed. Default: false.
+  inputs:
+    forceReinstallCredentialProvider: true
+
 - task: NuGetCommand@2
   displayName: 'Restore project dependencies'
   inputs:
     command: 'restore'
     restoreSolution: '**/*.sln'
-    feedsToUse 'select'
+    feedsToUse: 'select'
     vstsFeed: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models.New)'
     # Tailspin.SpaceGame.Web.Models
 
